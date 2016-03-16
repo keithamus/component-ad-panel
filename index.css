@@ -1,0 +1,85 @@
+@import "@economist/component-typography";
+@import "@economist/component-palette";
+
+:root {
+  --ad-left-strip-width: 5px;
+  --ad-panel-title-size: 1.7em;
+}
+
+.ad-panel__container {
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+/* Don'r render the "Advertisement" text when the ad loads nothing into the panel */
+.ad-panel__container--styled .ad-panel__googlead:empty {
+  display: none;
+}
+
+.ad-panel__container--styled .ad-panel__googlead::before,
+.ad-panel__container--styled .ad-panel__googlead {
+  background-color: var(--color-berlin);
+}
+
+.ad-panel__container--styled .ad-panel__googlead {
+  padding-left: var(--ad-left-strip-width);
+  margin-top: var(--ad-panel-title-size);
+}
+
+.ad-panel__container--styled .ad-panel__googlead::before {
+  content: attr(title);
+  padding: var(--ad-left-strip-width);
+  border-top-right-radius: calc(var(--ad-left-strip-width) / 2);
+  border-top-left-radius: calc(var(--ad-left-strip-width) / 2);
+  color: var(--color-london);
+  font-family: var(--ad-panel-fontfamily, var(--fontfamily-sans));
+  font-size: var(--ad-panel-text-size-step, var(--text-size-step--3));
+  line-height:  var(--ad-panel-line-height, 2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.ad-panel__container--block {
+  display: block;
+}
+
+.ad-panel__container--block .ad-panel__googlead::before,
+.ad-panel__container--block .ad-panel__googlead {
+  background-color: var(--color-berlin);
+}
+
+.ad-panel__container--block .ad-panel__googlead::before {
+  position:inherit;
+  line-height:  var(--ad-panel-line-height, 2.5);
+}
+
+.ad-panel__container--block .ad-panel__googlead {
+  padding-top:0.35em;
+  padding-bottom:2em;
+}
+
+.ad-panel__container--block .ad-panel__googlead {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.ad-panel__container iframe,
+.ad-panel__container img{
+  margin: 0 auto;
+  display: block;
+}
+
+.ad-panel__animated {
+  transform: translateY(100px);
+  transition: all 0.4s ease-out 0.5s;
+  transition-property: opacity, transform;
+  opacity: 0;
+}
+
+.ad-panel__animated.ad-panel--visible {
+  transform: translateY(0px);
+  opacity: 1;
+}
